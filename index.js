@@ -6,13 +6,8 @@ var http = require('http');
 var Schema = mongoose.Schema;
 const PORT = process.env.PORT || 5000
 
-
-const MONGOLAB_URI= "mongodb://szekim:kim12345678@kimcluster-shard-00-00-w4ocf.mongodb.net:27017,kimcluster-shard-00-01-w4ocf.mongodb.net:27017,kimcluster-shard-00-02-w4ocf.mongodb.net:27017/test?ssl=true&replicaSet=KimCluster-shard-0&authSource=admin"
-
-
-
-
-var dbURI = process.env.MONGOLAB_URI;
+const dbURI =
+  "mongodb://szekim:kim12345678@kimcluster-shard-00-00-w4ocf.mongodb.net:27017,kimcluster-shard-00-01-w4ocf.mongodb.net:27017,kimcluster-shard-00-02-w4ocf.mongodb.net:27017/test?ssl=true&replicaSet=KimCluster-shard-0&authSource=admin";
 
 //var dbURI = "mongodb://localhost/innobook"
 
@@ -21,7 +16,7 @@ const options = {
     poolSize: 10
 };
 
-mongoose.connect(dbURI).then(
+mongoose.connect(dbURI, options).then(
     () => {
         console.log("Database connection established!");
     },
