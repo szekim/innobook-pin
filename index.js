@@ -6,8 +6,10 @@ var http = require('http');
 var Schema = mongoose.Schema;
 const PORT = process.env.PORT || 5000
 
+
 const dbURI =
   "mongodb://szekim:kim12345678@licenseserver-shard-00-00-rxced.mongodb.net:27017,licenseserver-shard-00-01-rxced.mongodb.net:27017,licenseserver-shard-00-02-rxced.mongodb.net:27017/test?ssl=true&replicaSet=LicenseServer-shard-0&authSource=admin";
+
 
 //var dbURI = "mongodb://localhost/innobook"
 
@@ -101,6 +103,54 @@ app.post('/addpin', function (req, res) {
                 })
             }
         });
+    } catch (err) {
+        console.error(err)
+        res.send("Error:" + err)
+        res.end()
+    }
+});
+
+app.post('/checkpin', function (req, res) {
+    try {
+        registeredData.find({
+            'pin': req.body.pin,
+            'uuid': req.body.uuid
+        }, function (err, result) {
+            if (result.length > 0) {
+                res.send("OK")
+                res.end()
+            } else {
+                res.send("Pin check fail")
+                res.end()
+            }
+        })
+    } catch (err) {
+        console.error(err)
+        res.send("Error:" + err)
+        res.end()
+    }
+});
+
+app.post('/releasepin', function (req, res) {
+    try {
+        registeredData.find({
+            'pin': req.body.pin
+        }, function (err, result) {
+            if (result.length > 0) {
+                 registeredData.remove({
+                    'pin': req.body.pin
+                });
+                 var newpin = new availablePinData({
+                    'pin': req.body.pin
+                });
+                newpin.save()
+                res.send("OK")
+                res.end()
+            } else {
+                res.send("Pin not found")
+                res.end()
+            }
+        })
     } catch (err) {
         console.error(err)
         res.send("Error:" + err)
