@@ -139,6 +139,7 @@ app.post('/releasepin', function (req, res) {
             if (result.length > 0) {
                  registeredData.remove({
                     'pin': req.body.pin
+                }, function (err, result) {
                 });
                  var newpin = new availablePinData({
                     'pin': req.body.pin
