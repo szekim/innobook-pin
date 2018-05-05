@@ -11,7 +11,7 @@ const dbURI =
   "mongodb://szekim:kim12345678@licenseserver-shard-00-00-rxced.mongodb.net:27017,licenseserver-shard-00-01-rxced.mongodb.net:27017,licenseserver-shard-00-02-rxced.mongodb.net:27017/test?ssl=true&replicaSet=LicenseServer-shard-0&authSource=admin";
 
 
-//var dbURI = "mongodb://localhost/innobook"
+var dbURI = "mongodb://localhost/innobook"
 
 const options = {
     reconnectTries: Number.MAX_VALUE,
@@ -28,12 +28,12 @@ mongoose.connect(dbURI, options).then(
 );
 
 var registerSchema = mongoose.Schema({
-    pin: Number
+    pin: String
 });
 var availablePinData = mongoose.model('availablepins', registerSchema)
 
 var registeredSchema = mongoose.Schema({
-    pin: Number,
+    pin:  String,
     uuid: String,
     name: String
 })
@@ -167,7 +167,7 @@ app.get('/availablepin', function (req, res) {
                 res.end()
             } else {
                 res.send("No Available pin")
-            }
+            }å
         });
     } catch (err) {
         console.error(err)
