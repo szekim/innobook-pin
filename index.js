@@ -11,7 +11,7 @@ const dbURI =
   "mongodb://szekim:kim12345678@licenseserver-shard-00-00-rxced.mongodb.net:27017,licenseserver-shard-00-01-rxced.mongodb.net:27017,licenseserver-shard-00-02-rxced.mongodb.net:27017/test?ssl=true&replicaSet=LicenseServer-shard-0&authSource=admin";
 
 
-var dbURI = "mongodb://localhost/innobook"
+//var dbURI = "mongodb://localhost/innobook"
 
 const options = {
     reconnectTries: Number.MAX_VALUE,
