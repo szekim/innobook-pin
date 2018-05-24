@@ -167,7 +167,7 @@ app.get('/availablepin', function (req, res) {
                 res.end()
             } else {
                 res.send("No Available pin")
-            }å
+            }
         });
     } catch (err) {
         console.error(err)
